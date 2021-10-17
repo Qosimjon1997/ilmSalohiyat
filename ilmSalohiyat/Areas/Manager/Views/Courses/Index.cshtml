@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ilmSalohiyat.Models.Course>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center text-uppercase">List of Course</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary rounded-0"><i class="fa fa-plus-circle"></i> Add New</a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Comment</th>
+            <th>Price</th>
+            <th>Action(s)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <img src="~/img/@item.ImageURL" class="img-thumbnail" height="100" width="100" asp-append-version="true" />
+                </a>
+            </td>
+            <td>@item.Name</td>
+            <td>@item.Comment</td>
+            <td>@item.Price</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info rounded-0"><i class="fa fa-pencil-alt">Изменить</i></a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger rounded-0"><i class="fa fa-trash-alt">Удалить</i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
