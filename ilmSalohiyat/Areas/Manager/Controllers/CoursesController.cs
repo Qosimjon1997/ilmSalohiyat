@@ -78,7 +78,7 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
                     Price = model.Price,
                     ImageURL = uniqueFilename
                 };
-                _context.Add(course);
+                _context.Courses.Add(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -132,7 +132,7 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
                     }
                     course.ImageURL = ProcessUploadedFile(model);
                 }
-                _context.Update(course);
+                _context.Courses.Update(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

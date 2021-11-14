@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +23,8 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
             _context = context;
             webHostEnvironment = hostEnvironment;
         }
-        // GET: TeachersController
+
+        // GET: Teachers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Teachers.ToListAsync());
@@ -36,7 +38,8 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
                 return NotFound();
             }
 
-            var teacher = await _context.Teachers.FirstOrDefaultAsync(m => m.Id == id);
+            var teacher = await _context.Teachers
+                .FirstOrDefaultAsync(m => m.Id == id);
             var teacherViewModel = new TeacherViewModel()
             {
                 Id = teacher.Id,
@@ -76,14 +79,14 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
                     Description = model.Description,
                     ImageURL = uniqueFilename
                 };
-                _context.Add(teacher);
+                _context.Teachers.Add(teacher);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
         }
 
-        // GET: v/Edit/5
+        // GET: Teachers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -130,7 +133,7 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
                     }
                     teacher.ImageURL = ProcessUploadedFile(model);
                 }
-                _context.Update(teacher);
+                _context.Teachers.Update(teacher);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -155,11 +158,11 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
                 Description = teacher.Description,
                 ExistingImage = teacher.ImageURL
             };
-
             if (teacher == null)
             {
                 return NotFound();
             }
+
             return View(teacherViewModel);
         }
 
@@ -169,19 +172,19 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var teacher = await _context.Teachers.FindAsync(id);
-            var TeacherImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", teacher.ImageURL);
+            var CurrectImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", teacher.ImageURL);
             _context.Teachers.Remove(teacher);
             if (await _context.SaveChangesAsync() > 0)
             {
-                if (System.IO.File.Exists(TeacherImage))
+                if (System.IO.File.Exists(CurrectImage))
                 {
-                    System.IO.File.Delete(TeacherImage);
+                    System.IO.File.Delete(CurrectImage);
                 }
             }
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TeacherExists(int id)
+        private bool teacherExists(int id)
         {
             return _context.Teachers.Any(e => e.Id == id);
         }
