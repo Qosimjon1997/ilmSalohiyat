@@ -75,7 +75,7 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
                     Name = model.Name,
                     ImageURL = uniqueFilename
                 };
-                _context.Add(gallery);
+                _context.Galleries.Add(gallery);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -125,7 +125,7 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
                     }
                     gallery.ImageURL = ProcessUploadedFile(model);
                 }
-                _context.Update(gallery);
+                _context.Galleries.Update(gallery);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

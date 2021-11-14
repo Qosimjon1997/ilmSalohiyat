@@ -59,7 +59,7 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(news);
+                _context.News.Add(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -98,7 +98,7 @@ namespace ilmSalohiyat.Areas.Manager.Controllers
             {
                 try
                 {
-                    _context.Update(news);
+                    _context.News.Update(news);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

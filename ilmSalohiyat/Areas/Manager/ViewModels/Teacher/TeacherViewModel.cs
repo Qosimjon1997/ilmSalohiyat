@@ -11,9 +11,6 @@ namespace ilmSalohiyat.Areas.Manager.ViewModels.Teacher
         public string Lastname { get; set; }
 
         [Required]
-        public string ImageURL { get; set; }
-
-        [Required]
         public string Description { get; set; }
     }
 }
