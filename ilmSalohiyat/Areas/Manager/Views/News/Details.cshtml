@@ -4,39 +4,35 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Подробности</h1>
 
+<dl class="row">
+    <dt class="col-sm-2">
+        Название новости :
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    <dt class="col-sm-2">
+        Краткое содержание :
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Description)
+    </dd>
+    <dt class="col-sm-2">
+        Полный текст :
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Comment)
+    </dd>
+    <dt class="col-sm-2">
+        Введите дату :
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.PostTime)
+    </dd>
+</dl>
 <div>
-    <h4>News</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Comment)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Comment)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PostTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PostTime)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-area="manager" asp-controller="News" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-area="manager" asp-controller="News" asp-action="Index">Back to List</a>
+    <a asp-area="manager" asp-controller="News" asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a> |
+    <a asp-area="manager" asp-controller="News" asp-action="Index">Назад</a>
 </div>

@@ -1,5 +1,24 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<ilmSalohiyat.Models.Teacher>
+
 @{
+    ViewData["Title"] = "Учителя";
 }
+
+<h2 class="text-center text-uppercase">Список учителей</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-sm-3" style="padding:10px; margin:10px;">
+                <img class="card-img-top rounded-circle" width="75" src="~/img/@item.ImageURL" alt="Изображения">
+            </div>
+            <div class="col-sm-9" style="padding:10px; margin:10px;">
+                <h4>@item.Firstname @item.Lastname</h4>
+                <h6>
+                    @item.Description
+                </h6>
+            </div>
+        </div>
+    }
+</div>

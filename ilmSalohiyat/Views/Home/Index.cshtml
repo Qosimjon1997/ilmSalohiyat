@@ -1,80 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Ilm salohiyat";
 }
 
 <div class="row">
-    <div class="col-sm-3">
-        <div class="card" style="width:auto; padding:10px; margin:5px;">
-            <img class="card-img-top" src="~/img/docker.jpg" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-title">card Title</h4>
-
-            </div>
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3" style="margin:10px;">
+            <a asp-controller="Courses" asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none; color:black">
+                <div class="card" style="width:250px;">
+                    <img class="card-img-top" style="height:200px;" src="~/img/@item.ImageURL" alt="Изображения">
+                    <div class="card-body">
+                        <h4 class="card-title">@item.Name</h4>
+                    </div>
+                    <div class="card-footer">
+                        <h6>Стоимость : @item.Price</h6>
+                    </div>
+                </div>
+            </a>
         </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="card" style="width: auto; padding: 10px; margin: 5px;">
-            <img class="card-img" src="~/img/docker.jpg" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-text">card Title</h4>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="card" style="width: auto; padding: 10px; margin: 5px;">
-            <img class="card-img-top" src="~/img/docker.jpg" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-title">card Title</h4>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="card" style="width: auto; padding: 10px; margin: 5px;">
-            <img class="card-img-top" src="~/img/docker.jpg" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-title">card Title</h4>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="card" style="width: auto; padding: 10px; margin: 5px;">
-            <img class="card-img-top" src="~/img/docker.jpg" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-title">card Title</h4>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="card" style="width: auto; padding: 10px; margin: 5px;">
-            <img class="card-img-top" src="~/img/docker.jpg" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-title">card Title</h4>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="card" style="width: auto; padding: 10px; margin: 5px;">
-            <img class="card-img-top" src="~/img/docker.jpg" alt="Card image">
-            <div class="card-body">
-                <h4 class="card-title">card Title</h4>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <div>
-            <h6 style="text-align:center;">С дополнительной информацией можно ознакомиться по телефону или через наш телеграм канал. Проходите по ссылке и вступайте,чтобы не пропустить новости и события учебного центра</h6>
-        </div>
-        <div>
-            <h6 style="text-align:center;"><a href="https://t.me/ilmsalohiyat" target="_blank">t.me/ilmsalohiyat</a></h6>
-        </div>
-    </div>
+    }
 </div>
