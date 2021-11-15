@@ -1,5 +1,7 @@
 ﻿using ilmSalohiyat.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace ilmSalohiyat.Controllers
 {
@@ -13,10 +15,11 @@ namespace ilmSalohiyat.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.Courses.ToListAsync());
         }
+
 
 
     }
