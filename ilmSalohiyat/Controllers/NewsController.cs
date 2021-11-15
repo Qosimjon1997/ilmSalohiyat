@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ilmSalohiyat.Data;
+using System.Linq;
 
 namespace ilmSalohiyat.Controllers
 {
@@ -17,7 +18,7 @@ namespace ilmSalohiyat.Controllers
         // GET: News
         public async Task<IActionResult> Index()
         {
-            return View(await _context.News.ToListAsync());
+            return View(await _context.News.OrderByDescending(x => x.PostTime).ToListAsync());
         }
 
         // GET: News/Details/5

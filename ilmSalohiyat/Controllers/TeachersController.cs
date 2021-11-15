@@ -1,87 +1,50 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ilmSalohiyat.Areas.Manager.ViewModels.Teacher;
+using ilmSalohiyat.Data;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace ilmSalohiyat.Controllers
 {
     public class TeachersController : Controller
     {
-        // GET: TeachersController
-        public ActionResult Index()
+        private readonly ApplicationDbContext _applicationDbContext;
+
+        public TeachersController(ApplicationDbContext applicationDbContext)
         {
-            return View();
+            _applicationDbContext = applicationDbContext;
         }
 
-        // GET: TeachersController/Details/5
-        public ActionResult Details(int id)
+        // GET: Teachers
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _applicationDbContext.Teachers.ToListAsync());
         }
 
-        // GET: TeachersController/Create
-        public ActionResult Create()
+        // GET: Teachers/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
-        }
-
-        // POST: TeachersController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            if (id == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: TeachersController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+            var teacher = await _applicationDbContext.Teachers
+                .FirstOrDefaultAsync(m => m.Id == id);
+            var teacherViewModel = new TeacherViewModel()
+            {
+                Id = teacher.Id,
+                Firstname = teacher.Firstname,
+                Lastname = teacher.Lastname,
+                Description = teacher.Description,
+                ExistingImage = teacher.ImageURL
+            };
+            if (teacher == null)
+            {
+                return NotFound();
+            }
 
-        // POST: TeachersController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: TeachersController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: TeachersController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View(teacherViewModel);
         }
     }
 }

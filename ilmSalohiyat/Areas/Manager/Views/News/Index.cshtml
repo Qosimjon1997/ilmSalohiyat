@@ -4,25 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h3 class="text-center text-uppercase">Учителя</h3>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary rounded-0"><i class="fa fa-plus-circle"></i>Новый курс</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Название новости
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Краткое содержание
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Comment)
+                Полный текст
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostTime)
+                Дата
             </th>
             <th></th>
         </tr>
@@ -43,9 +43,8 @@
                 @Html.DisplayFor(modelItem => item.PostTime)
             </td>
             <td>
-                <a asp-area="manager" asp-controller="News" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-area="manager" asp-controller="News" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-area="manager" asp-controller="News" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-area="manager" asp-controller="News" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info rounded-0"><i class="fa fa-pencil-alt">Изменить</i></a>
+                <a asp-area="manager" asp-controller="News" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger rounded-0"><i class="fa fa-trash-alt">Удалить</i></a>
             </td>
         </tr>
 }
